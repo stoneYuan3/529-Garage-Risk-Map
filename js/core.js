@@ -6,7 +6,7 @@ $('document').ready(function(){
 		type:'POST',
 		url:'server/base.php',
 		data:{},
-		dataType:'text',
+		dataType:'json',
 
 		success:function(data){
 			result1=data;
@@ -21,8 +21,11 @@ $('document').ready(function(){
 			L.geoJSON(result1, {
 			    style: myStyle
 			}).addTo(map);						
-		}
-			
+		},
+
+        error:function(data){
+            console.log('You moron, you messed something up!');
+        }		
 
 	});
 
