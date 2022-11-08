@@ -10,7 +10,7 @@ $('document').ready(function(){
 
 		success:function(data){
 			result1=data;
-			// console.log(result1);
+			console.log(result1);
 			// $('#result').html(result1);	
 			var myStyle = {
 			    "color": "#ff7800",
