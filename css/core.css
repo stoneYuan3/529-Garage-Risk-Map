@@ -1,0 +1,118 @@
+
+/*////////////OVERWRITE DEFAULT STYLES/////////////////////*/
+html{font-family:Arial,sans-serif;}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,figure{ margin:0; padding:0;}
+
+ul, ol{ list-style:none;}
+
+a{ text-decoration: none;color: black; }
+
+ul li{ word-break: break-all; }
+
+figure img,img{
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+
+/*///master///*/
+
+.flex{
+	display: flex;
+	flex-wrap: wrap;
+}
+.flex-column{
+	flex-direction: column;
+}
+.flex-row{
+	flex-direction: row;
+}
+
+h1,h2{
+	margin: 0.75rem 0 0.25rem 0;
+}
+
+html,body{
+	height: 100%;
+}
+body{
+		overflow-y: hidden;
+}
+.section-map{
+	display: flex;
+	height: 100%;
+}
+#map{ 
+	/*height: 30rem;*/
+	/*position: relative;*/
+	height: 100%;
+	width: 100%;
+
+	/*float: left;*/
+}
+
+/*/////////////*/
+
+header nav{
+	background-color: #002C40;
+	padding: 1rem 0.5rem;
+	justify-content: space-between;
+}
+header nav a{
+	color: white;
+	margin: 0 0.5rem;
+}
+header nav div{
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.section-querySearch div{
+	margin-right: 2rem;
+	margin-bottom: 0.75rem;
+}*/
+
+/*.section-querySearch-subsec label,.section-querySearch-subsec select, .section-querySearch-subsec p, .section-querySearch-subsec input{
+	margin-right: 0.5rem;
+	margin-bottom: 0.25rem;
+}
+
+.section-orderParameter input{
+	margin-right: 0.5rem;
+}
+
+
+.section-results{
+	margin-top:3rem; 
+	padding-top:1rem; 
+	border-top:1px solid black;
+}
+
+.section-results div{
+	margin-top: 2rem;
+}
+
+th{
+	border: 3px solid black;
+	padding: 1rem;
+}
+td{
+	border: 1px solid black;
+	padding: 1rem;
+}
+*/

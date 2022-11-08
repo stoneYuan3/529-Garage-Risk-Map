@@ -1,0 +1,5 @@
+
+
+map grayscale
+https://github.com/Zverik/leaflet-grayscale
+

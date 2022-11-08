@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta charset="utf-8">
+		<title>529 Garage</title>
+
+		<link rel = "stylesheet" href = "css/core.css">
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+	     integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+	     crossorigin=""/>
+
+	</head>
+
+
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+     crossorigin=""></script>
+     <script src="TileLayer.Grayscale.js"></script>
+
+
+    <body>
+    	<header>
+    		<nav class='flex flex-row'>
+    			<div class='flex flex-row'>
+    				<a href=""></a>
+    				<a href="">Home</a>
+    				<a href="">Your Garage</a>
+    				<a href="">Check a Bike</a>
+    				<a href="">Found Bike</a>
+    				<a href="">Shield/Goods</a>
+    				<a href="">Risk Map</a>
+    			</div>
+
+    			<div>
+    				<a href="">login/signup</a>
+    			</div>
+
+    		</nav>
+    	</header>
+
+    	<!-- <div class="section-map"> -->
+    		<div id="map"></div>
+    	<!-- </div> -->
+ 	</body>
+
+
+    <script>
+      // var map = L.map('map').setView([51.505, -0.09], 13);
+      var map = L.map('map').setView([49.28897790869182, -123.11445735454026], 13);
+
+      L.tileLayer.grayscale('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		ttribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		}).addTo(map);
+
+      var polygon = L.polygon([
+		    // color: 'red',
+		    // fillColor: '#f03',
+		    // fillOpacity: 0.5,      		
+		    [51.509, -0.08],
+		    [51.503, -0.06],
+		    [51.495, -0.06],
+		    [51.51, -0.047]
+		],{
+			color: 'red',
+		    fillColor: '#f03',
+		    fillOpacity: 0.5,
+		}).addTo(map);
+
+      </script>
+
+     <script src="geojson.js"></script>
+
+</html>
