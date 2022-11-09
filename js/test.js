@@ -30,7 +30,7 @@
 //50 pull per day limit for free trail
 
   // var arr=['V6A','V6B','V6C','V6E','V6G','V6H','V6J','V6L','V6M','V6N','V6P','V6R','V6S','V6T','V6Z'];
-  var arr=['V6A','V6B'];
+  var arr=['V6A','V6B','V6C','V6E'];
 
   var code='';
 
@@ -57,12 +57,13 @@ $.ajax({
     var result='';
     console.log(data);
     data_str=JSON.stringify(data);
-    result+='<p>';
+    // result+='<p>';
     result+=data_str;
     result+=',';
-    result+='</p>'
+    // result+='</p>'
     console.log(result);
-    $('p').after(result);
+    // $('p').after(result);
+    $('p').append(result);
   }
 });
 
