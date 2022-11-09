@@ -13,7 +13,7 @@ FROM postal_codes_experm_2";
 
 	$search=$database->query($query_1);
 	$output_arr=[];
-	$output='';
+	$output='[';
 	for($i=0;$i<$search->num_rows;$i++){
 		$result=$search->fetch_row();
 		// echo $result[0];
@@ -25,6 +25,7 @@ FROM postal_codes_experm_2";
 		$output.=',';
 	}
 	$output_final=rtrim($output,',');
+	$output_final.=']';
 	echo $output_final;
 	// print_r($output_arr);
 

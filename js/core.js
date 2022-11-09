@@ -10,17 +10,20 @@ $('document').ready(function(){
 
 		success:function(data){
 			result1=data;
-			console.log(result1);
+			// console.log(result1[0]);
 			// $('#result').html(result1);	
 			var myStyle = {
-			    "color": "#ff7800",
+			    "color": "red",
 			    "weight": 5,
 			    "opacity": 0.65
 			};
 
+			// for(let i=0;i<result1.length;i++){
+				// console.log(result1[i]);
 			L.geoJSON(result1, {
 			    style: myStyle
-			}).addTo(map);						
+			}).addTo(map);					
+			// }	
 		},
 
         error:function(data){
