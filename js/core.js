@@ -36,8 +36,10 @@ $('document').ready(function(){
 				    "opacity": 0.65
 				    // "opacity": result1[i][1]
 				};
-
-				L.geoJSON(result1[i][0], {
+				var geoj=result1[i][0];
+				console.log(geoj);
+				
+				L.geoJSON(geoj, {
 				    style: myStyle
 				}).addTo(map);	
 
