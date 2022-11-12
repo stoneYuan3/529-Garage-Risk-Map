@@ -12,24 +12,33 @@
 // FROM postal_codes_experm_2";
 	//JSON_OBJECT() is used to stick non JSON variables together into a JSON object
 	//not needed when the data stored is already vaild JSON (in fact it causes issues)
-	$query_1="SELECT properties FROM postal_codes_experm_4";
+	$query_1="SELECT properties,num_of_cases FROM postal_codes_experm_4";
 
 	$search=$database->query($query_1);
 	$output_arr=[];
 	$output='[';
 	for($i=0;$i<$search->num_rows;$i++){
 		$result=$search->fetch_row();
-		// echo $result[0];
-		array_push($output_arr,$result[0]);
+		// echo $result[1];
+
+		//0 is JSON, 1 is number of cases
+		$arr_each=[$result[0],$result[1]];
+		// $res='['.$result[0].']';
+		// $arr_each=[$res,$result[1]];
+
+		// print_r($arr_each);	
+		// echo'<br>';
+		array_push($output_arr,$arr_each);
 	}
 
 	for($i=0;$i<count($output_arr);$i++){
-		$output.=$output_arr[$i];
+		$output.=$output_arr[$i][0];
 		$output.=',';
 	}
 	$output_final=rtrim($output,',');
 	$output_final.=']';
-	echo $output_final;
+	// print_r($output_final);
+	echo json_encode($output_arr);
 	// print_r($output_arr);
 
 ?>
