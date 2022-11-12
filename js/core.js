@@ -14,7 +14,7 @@ $('document').ready(function(){
 			// $('#result').html(result1);	
 			var myStyle = {
 			    "color": "red",
-			    "weight": 5,
+			    "weight": 1,
 			    "opacity": 0.65
 			};
 
