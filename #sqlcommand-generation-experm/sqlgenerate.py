@@ -48,12 +48,16 @@ for i in range(len(loadjson)):
     result_each_doubleQuote=json.dumps(loadjson[i]["features"][0])
     result_each_final=str(result_each_doubleQuote)
 
-    sqlTableName="postal_codes_experm_4"
-    sqlLine1="INSERT INTO "+sqlTableName+"(properties,num_of_cases)"
-    sqlLine2=" VALUES('"+result_each_final+"',0); "    
+    # print(loadjson[i]["features"][0]["properties"]["postal-fsa"]);
+    result_postal_code=loadjson[i]["features"][0]["properties"]["postal-fsa"];
 
+    sqlTableName="postal_code_map"
+    sqlLine1="INSERT INTO "+sqlTableName+"(properties,postal_code,num_of_cases)"
+    sqlLine2=" VALUES('"+result_each_final+"','" + result_postal_code + "',0); "    
+    # print(sqlLine2)
     # file.write(result_each)
     file.write(sqlLine1)
     file.write(sqlLine2)
+    
 
 file.close()

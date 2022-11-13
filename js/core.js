@@ -44,7 +44,7 @@ $('document').ready(function(){
 	var result1="";
 	$.ajax({
 		type:'POST',
-		url:'server/base.php',
+		url:'server/base.php?request=0',
 		data:{},
 		dataType:'json',
 
@@ -54,9 +54,10 @@ $('document').ready(function(){
 			// $('#result').html(result1);	
 
 			for(let i=0;i<result1.length;i++){
-				//0 is JSON, 1 is number of cases
+				//0 is JSON, 1 is postal code, 2 is number of cases
 				// $('#test').append(result1[i][0]);
-				var fill=caseColour(result1[i][1]);
+				var fill=caseColour(result1[i][2]);
+				// console.log(result1[i][1]);
 				console.log(fill);
 				var myStyle = {
 					"fillColor":fill,

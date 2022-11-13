@@ -4,7 +4,8 @@
 	$dbhost='localhost';
     $dbuser="root";
     $dbpass="";
-    $dbname="geodatatest";	
+    // $dbname="geodatatest";
+    $dbname="iat438-individualproject";	
 ?>
 
 <?php

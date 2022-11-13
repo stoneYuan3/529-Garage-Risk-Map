@@ -3,6 +3,14 @@
 <?php
 	require_once('functions.php');
 
+
+	// if(isset($_GET['request'])){
+	// 	echo $_GET['request'];
+	// 	if($_GET['request']=0){
+	// 		echo 'fuck you';
+	// 	}
+	// };
+
 	$database=db_connect($dbhost,$dbuser,$dbpass,$dbname);
 // 	$query_1="SELECT 
 //   JSON_MERGE(
@@ -12,7 +20,7 @@
 // FROM postal_codes_experm_2";
 	//JSON_OBJECT() is used to stick non JSON variables together into a JSON object
 	//not needed when the data stored is already vaild JSON (in fact it causes issues)
-	$query_1="SELECT properties,num_of_cases FROM postal_codes_experm_4";
+	$query_1="SELECT properties,postal_code,num_of_cases FROM postal_code_map";
 
 	$search=$database->query($query_1);
 	$output_arr=[];
@@ -21,8 +29,8 @@
 		$result=$search->fetch_row();
 		// echo $result[1];
 
-		//0 is JSON, 1 is number of cases
-		$arr_each=[$result[0],$result[1]];
+		//0 is JSON, 1 is postal code, 2 is number of cases
+		$arr_each=[$result[0],$result[1],$result[2]];
 		// $res='['.$result[0].']';
 		// $arr_each=[$res,$result[1]];
 
