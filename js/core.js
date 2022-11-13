@@ -1,25 +1,5 @@
 
 function caseColour(number){
-	// switch (number){
-	// 	case number>=200:
-	// 		return '#99000d';
-	// 		break;
-	// 	case number>=100 && number<200:
-	// 		return '#ef3b2c';
-	// 		break;
-	// 	case number>=50 && number<100:
-	// 		return '#fc9272';
-	// 		break;
-	// 	case number>=25 && number<50:
-	// 		return '#fcbba1';
-	// 		break;
-	// 	case number>0 && number<25:
-	// 		return '#fee0d2';
-	// 		break;		
-	// 	case number==0:
-	// 		return '#fff5f0';
-	// 		break;		
-	// }
 	if(number>=200){
 		return '#99000d';		
 	}
@@ -40,8 +20,11 @@ function caseColour(number){
 	}			
 }
 
+
+
 $('document').ready(function(){
 	var result1="";
+	var connSuccess=false;
 	$.ajax({
 		type:'POST',
 		url:'server/base.php?request=0',
@@ -52,7 +35,6 @@ $('document').ready(function(){
 			result1=data;
 			// console.log(result1[0]);
 			// $('#result').html(result1);	
-
 			for(let i=0;i<result1.length;i++){
 				//0 is JSON, 1 is postal code, 2 is number of cases
 				// $('#test').append(result1[i][0]);
@@ -68,6 +50,7 @@ $('document').ready(function(){
 					"dashArray":3
 				    // "opacity": 0
 				    // "opacity": result1[i][1]
+
 				};
 				//base.php json encoded the entire array but not individual objects within the array
 				//must JSON.parse the specific array key that refers to the json object again
@@ -76,22 +59,74 @@ $('document').ready(function(){
 				// console.log(geoj);
 				// console.log(JSON.parse(result1[0][0]));
 				// console.log(result1[i][1]);
-				
-				L.geoJSON(geoj, {
+				var postal_code=L.geoJSON(geoj, {
 					style: myStyle
-				}).addTo(map);	
+				}).addTo(map);
 
+				$('path').attr('id',result1[i][1]);
+
+				// $('path').ready(function(){
+				// 	$(this).attr('id',result1[i][1]);
+				// });				
+				// console.log(postal_code[geoj.properties]);
+				// console.log(geoj.properties.postal-fsa);
+				
 			}
+			// for(let i=0;i<result1.length;i++){
+			// 	$('path').each(function(index){
+			// 		$(this).attr('id',result1[i][1]);
+			// 	})
+			// }
 
+			connSuccess=true;
+			console.log(connSuccess);
+			if(connSuccess){
+				// map.on('click', highlightFeature);
+				$('path').hover(
+					function(){
+						$(this).css("stroke-width","5");
+					},
+					function(){
+						$(this).css("stroke-width","1.5");
+					}			
+				);
+			}			
 		},
-
 		error:function(data){
 			console.log('You moron, you messed something up!');
 		}		
-
 	});
+	
+	// if(connSuccess){
+	// 	// map.on('click', highlightFeature);
+	// 	$('path').hover(
+	// 		function(){
+	// 			$(this).css("stroke-width","3");
+	// 		},
+	// 		function(){
+	// 			$(this).css("stroke-width","1.5");
+	// 		}			
+	// 	);
+	// }
+
+
 
 });
 
 
 
+function highlightFeature(e) {
+	var layer = e.target;
+
+	layer.setStyle({
+		weight: 5,
+		color: '#666',
+		dashArray: '',
+		fillOpacity: 0.7
+	});
+
+	layer.bringToFront();
+}
+function resetHighlight(e) {
+	geojson.resetStyle(e.target);
+}
