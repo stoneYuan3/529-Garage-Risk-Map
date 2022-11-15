@@ -34,8 +34,22 @@
     		</nav>
     	</header>
 
-    	<!-- <div class="section-map"> -->
-    		<div id="map"></div>
+    	<!-- <div class="flex flex-row"> -->
+        <section class="flex flex-row section-info">
+          <session class="section-hoverInfo style-hide flex flex-column">
+            <h1></h1>
+            <p></p>
+          </session>
+          <session class="flex flex-column section-detailedInfo style-hide flex flex-column">
+            <div class="flex flex-row section-titleBar">
+              <h1>Information</h1>
+              <button><img src=''></button>
+            </div>   
+          </session>
+        </section>
+
+      	<div id="map"></div>
+
     	<!-- </div> -->
 
 
@@ -47,7 +61,7 @@
 
     <script>
       // var map = L.map('map').setView([51.505, -0.09], 13);
-      var map = L.map('map').setView([49.28897790869182, -123.11445735454026], 13);
+      var map = L.map('map', {zoomControl:false}).setView([49.28897790869182, -123.11445735454026], 13);
 
       L.tileLayer.grayscale('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,

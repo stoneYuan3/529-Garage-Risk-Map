@@ -68,9 +68,33 @@ header nav div{
 	
 }
 
+.section-info{
+	position: absolute;
+  top: 5rem;
+  right: 2rem;
+  z-index: 1000;
+  max-height: 90%;
 
+}
+.section-hoverInfo{
+	position: relative;
+	margin-right: 2rem;
+	/*height: 2rem;*/
+	/*align-items: center;*/
+}
+.section-hoverInfo,.section-detailedInfo{
+	background-color: white;
+  border-radius: 1rem;	
+  padding: 1rem;
+}
 
+.section-titleBar{
+	align-items: center;
+}
 
+.style-hide{
+	display: none;
+}
 
 
 

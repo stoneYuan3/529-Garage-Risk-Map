@@ -50,9 +50,9 @@ $('document').ready(function(){
 				//must JSON.parse the specific array key that refers to the json object again
 				//or error "invaild geoJSON object" will occur
 				var geoj=JSON.parse(result1[i][0]);
-				// console.log(geoj);
-				// console.log(JSON.parse(result1[0][0]));
-				// console.log(result1[i][1]);
+					// console.log(geoj);
+					// console.log(JSON.parse(result1[0][0]));
+					// console.log(result1[i][1]);
 
 				var postal_code=L.geoJSON(geoj, {
 					style: myStyle
@@ -70,24 +70,86 @@ $('document').ready(function(){
 			console.log(connSuccess);
 			if(connSuccess){
 				// map.on('click', highlightFeature);
+
+				//START hover///////////////////
 				$('path').hover(
 					function(){
 						$(this).css("stroke-width","5");
-						console.log($(this).attr("id"));
-							// $.ajax({
-							// 	type:'POST',
-							// 	url:'server/base.php?request=1',
-							// 	data:{},
-							// 	dataType:'json',
-							// 	success:function(data){
-							// 		console.log("yee");
-							// 	}
-							// });									
+						var postal_code=$(this).attr("id");
+						// console.log(postal_code);
+						// console.log($('.section-hoverInfo').hasClass('.style-hide'));
+						if($('.section-hoverInfo').hasClass('style-hide')){
+							$('.section-hoverInfo').removeClass('style-hide');
+							var link= 'server/base.php?request=1&code=';
+							link+=postal_code;	
+							// console.log(link);						
+							$.ajax({
+								type:'POST',
+								url: link,
+								data:{},
+								dataType:'json',	
+								success:function(data){
+									console.log(data);
+									$('.section-hoverInfo h1').html(data[0]);
+									$('.section-hoverInfo p').html(data[1]+" cases");
+								},
+								error:function(data){
+									console.log('You moron, you messed something up!');
+								}													
+							});
+						}
+						// else{
+						// 	console.log('not hided');
+						// }
 					},
 					function(){
 						$(this).css("stroke-width","1.5");
-					}			
+						if(!$('.section-hoverInfo').hasClass('style-hide')){
+							$('.section-hoverInfo').addClass('style-hide');
+						}						
+					}
 				);
+				//END hover//////////////////////
+
+				$('path').click(
+					function(){
+						if($('.section-detailedInfo').hasClass('style-hide')){
+							$(this).css("stroke-width","5");
+
+							$('.section-detailedInfo').removeClass('style-hide');
+							var postal_code=$(this).attr("id");
+							var link= 'server/base.php?request=2&code=';
+							link+=postal_code;		
+
+							// $.ajax({
+							// 	type:'POST',
+							// 	url: link,
+							// 	data:{},
+							// 	dataType:'json',	
+							// 	success:function(data){
+							// 		console.log(data);
+							// 		$('.section-hoverInfo h1').html(data[0]);
+							// 		$('.section-hoverInfo p').html(data[1]+" cases");
+							// 	},
+							// 	error:function(data){
+							// 		console.log('You moron, you messed something up!');
+							// 	}													
+							// });	
+
+						}
+					
+						// else{
+						// 	$(this).css("stroke-width","5");
+						// 	$('.section-detailedInfo').addClass('style-hide');
+						// }
+					}
+				);
+				$('.section-titleBar button').click(
+					function(){
+						$('.section-detailedInfo').addClass('style-hide');
+					}
+				);
+
 			}			
 		},
 		error:function(data){
