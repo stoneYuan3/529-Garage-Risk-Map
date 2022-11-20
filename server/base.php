@@ -66,15 +66,15 @@
 		}
 
 	}//END if(isset($_GET['request']))//////////////////
-
+	
+            // <div class="flex flex-row section-caseReport">
+            //     <div class="img">
+            //       <img src='img/image.jpeg'>
+            //     </div>
+            //     <div class="flex flex-column section-case-texts">
+            //       <h2>2021 Black Rad Power Bikes Rad Mini 4 Electric Bike</h2>    
+            //       <p>reported on 12/10/2022</p>
+            //     </div>
+            //   </div>
 ?>
 
-<!--             <div class="flex flex-row section-caseReport">
-                <div class="img">
-                  <img src='img/image.jpeg'>
-                </div>
-                <div class="flex flex-column section-case-texts">
-                  <h2>2021 Black Rad Power Bikes Rad Mini 4 Electric Bike</h2>    
-                  <p>reported on 12/10/2022</p>
-                </div>
-              </div> -->

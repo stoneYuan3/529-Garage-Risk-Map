@@ -1,0 +1,5 @@
+
+
+111-11-20
+
+extremely weird bug. left an html comment (<!-- contents -->) outside the <?php?> code in base.php, and for some reason it broke the ajax call system. Ajax call returns an error and postal code boundaries wont load at all, fixed after removing the html comment
