@@ -7,8 +7,7 @@
 
 
 	if(isset($_GET['request'])){
-		// echo $_GET['request'];
-		// if($_GET['request']=0){
+
 		switch($_GET['request']){
 			case 0:
 				//JSON_OBJECT() is used to stick non JSON variables together into a JSON object
@@ -20,15 +19,8 @@
 				$output='[';
 				for($i=0;$i<$search->num_rows;$i++){
 					$result=$search->fetch_row();
-					// echo $result[1];
-
 					//0 is JSON, 1 is postal code, 2 is number of cases
 					$arr_each=[$result[0],$result[1],$result[2]];
-					// $res='['.$result[0].']';
-					// $arr_each=[$res,$result[1]];
-
-					// print_r($arr_each);	
-					// echo'<br>';
 					array_push($output_arr,$arr_each);
 				}
 
@@ -52,18 +44,37 @@
 					// print_r($output);
 					echo json_encode($output);
 				}
-				
-				// echo $_GET['id'];
-		}
+				break;
 
+			case 2:
+				if(isset($_GET['code'])){
+					$code=$_GET['code'];
+					$query_1="SELECT theft_report.postal_code,theft_report.report_date,bikes.manufacturer,bikes.model,bikes.type,images.img_link FROM theft_report,bikes,images WHERE theft_report.postal_code='".$code."' AND theft_report.bike_id=bikes.id AND bikes.id=images.bike_id";
+					
+					$result=$database->query($query_1);
+					$output_array=[];
+					for($i=0;$i<$result->num_rows;$i++){
+						$output_each=$result->fetch_assoc();
+						// print_r($output_each);
+						array_push($output_array,$output_each);
+					}
+					print_r($output_array);
+
+					// echo json_encode($output_array);	
+				}
+				break;
+		}
 
 	}//END if(isset($_GET['request']))//////////////////
 
-
-			// 	$query_1="SELECT 
-			//   JSON_MERGE(
-			//     JSON_OBJECT(
-			//         'type',type), 
-			//     properties) AS data
-			// FROM postal_codes_experm_2";
 ?>
+
+<!--             <div class="flex flex-row section-caseReport">
+                <div class="img">
+                  <img src='img/image.jpeg'>
+                </div>
+                <div class="flex flex-column section-case-texts">
+                  <h2>2021 Black Rad Power Bikes Rad Mini 4 Electric Bike</h2>    
+                  <p>reported on 12/10/2022</p>
+                </div>
+              </div> -->

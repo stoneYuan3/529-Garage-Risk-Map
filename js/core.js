@@ -1,27 +1,4 @@
 
-function caseColour(number){
-	if(number>=200){
-		return '#99000d';		
-	}
-	else if(number>=100 && number<200){
-		return '#ef3b2c';
-	}
-	else if(number>=50 && number<100){
-		return '#fc9272';
-	}
-	else if(number>=25 && number<50){
-		return '#fcbba1';
-	}
-	else if(number>0 && number<25){
-		return '#fee0d2';
-	}	
-	else{
-		return '#fff5f0';
-	}			
-}
-
-
-
 $('document').ready(function(){
 	var result1="";
 	var connSuccess=false;
@@ -50,10 +27,6 @@ $('document').ready(function(){
 				//must JSON.parse the specific array key that refers to the json object again
 				//or error "invaild geoJSON object" will occur
 				var geoj=JSON.parse(result1[i][0]);
-					// console.log(geoj);
-					// console.log(JSON.parse(result1[0][0]));
-					// console.log(result1[i][1]);
-
 				var postal_code=L.geoJSON(geoj, {
 					style: myStyle
 				}).addTo(map);
@@ -62,45 +35,21 @@ $('document').ready(function(){
 				//$('path').eq(i) is equvalent to $('path')[i]
 				//although [i] works fine with console log, it cannot have functions attached to it (ex, $('path')[i].attr(...)) leads to error "attr() is not a function"
 				$('g path').eq(i).attr('id',result1[i][1]);		
-					// console.log($('g path').length);
-					// console.log($('g path')[i]);
-					// console.log($('path[id]').length>0);
 			}
 			connSuccess=true;
 			console.log(connSuccess);
 			if(connSuccess){
-				// map.on('click', highlightFeature);
-
 				//START hover///////////////////
 				$('path').hover(
 					function(){
 						$(this).css("stroke-width","5");
 						var postal_code=$(this).attr("id");
-						// console.log(postal_code);
-						// console.log($('.section-hoverInfo').hasClass('.style-hide'));
 						if($('.section-hoverInfo').hasClass('style-hide')){
 							$('.section-hoverInfo').removeClass('style-hide');
 							var link= 'server/base.php?request=1&code=';
-							link+=postal_code;	
-							// console.log(link);						
-							$.ajax({
-								type:'POST',
-								url: link,
-								data:{},
-								dataType:'json',	
-								success:function(data){
-									console.log(data);
-									$('.section-hoverInfo h1').html(data[0]);
-									$('.section-hoverInfo p').html(data[1]+" cases");
-								},
-								error:function(data){
-									console.log('You moron, you messed something up!');
-								}													
-							});
+							link+=postal_code;						
+							sectionHover(link);
 						}
-						// else{
-						// 	console.log('not hided');
-						// }
 					},
 					function(){
 						$(this).css("stroke-width","1.5");
@@ -115,27 +64,25 @@ $('document').ready(function(){
 					function(){
 						if($('.section-detailedInfo').hasClass('style-hide')){
 							$(this).css("stroke-width","5");
-
 							$('.section-detailedInfo').removeClass('style-hide');
 							var postal_code=$(this).attr("id");
 							var link= 'server/base.php?request=2&code=';
-							link+=postal_code;		
+							link+=postal_code;
 
-							// $.ajax({
-							// 	type:'POST',
-							// 	url: link,
-							// 	data:{},
-							// 	dataType:'json',	
-							// 	success:function(data){
-							// 		console.log(data);
-							// 		$('.section-hoverInfo h1').html(data[0]);
-							// 		$('.section-hoverInfo p').html(data[1]+" cases");
-							// 	},
-							// 	error:function(data){
-							// 		console.log('You moron, you messed something up!');
-							// 	}													
-							// });	
-
+							$.ajax({
+								type:'POST',
+								url: link,
+								data:{},
+								dataType:'json',	
+								success:function(data){
+									console.log(data);
+									$('.section-hoverInfo h1').html(data[0]);
+									$('.section-hoverInfo p').html(data[1]+" cases");
+								},
+								error:function(data){
+									console.log('You moron, you messed something up!');
+								}													
+							});	
 						}
 					
 						// else{
