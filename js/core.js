@@ -48,7 +48,20 @@ $('document').ready(function(){
 							$('.section-hoverInfo').removeClass('style-hide');
 							var link= 'server/base.php?request=1&code=';
 							link+=postal_code;						
-							sectionHover(link);
+							$.ajax({
+								type:'POST',
+								url: link,
+								data:{},
+								dataType:'json',	
+								success:function(data){
+									console.log(data);
+									$('.section-hoverInfo h1').html(data[0]);
+									$('.section-hoverInfo p').html(data[1]+" cases");
+								},
+								error:function(data){
+									console.log('You moron, you messed something up!');
+								}													
+							});	
 						}
 					},
 					function(){
@@ -65,37 +78,37 @@ $('document').ready(function(){
 						if($('.section-detailedInfo').hasClass('style-hide')){
 							$(this).css("stroke-width","5");
 							$('.section-detailedInfo').removeClass('style-hide');
-							var postal_code=$(this).attr("id");
-							var link= 'server/base.php?request=2&code=';
-							link+=postal_code;
-
-							$.ajax({
-								type:'POST',
-								url: link,
-								data:{},
-								dataType:'json',	
-								success:function(data){
-									console.log(data);
-									$('.section-hoverInfo h1').html(data[0]);
-									$('.section-hoverInfo p').html(data[1]+" cases");
-								},
-								error:function(data){
-									console.log('You moron, you messed something up!');
-								}													
-							});	
 						}
+						var postal_code=$(this).attr("id");
+						var link= 'server/base.php?request=2&code=';
+						link+=postal_code;
+
+						$.ajax({
+							type:'POST',
+							url: link,
+							data:{},
+							dataType:'text',	
+							success:function(data){
+								console.log(data);
+								$('.section-detailedInfo').html(data);
+								$('#section-close').click(
+									function(){
+										$('.section-detailedInfo').addClass('style-hide');
+									}
+								);								
+							},
+							error:function(data){
+								console.log('You moron, you messed something up!');
+							}													
+						});	
+					}
 					
-						// else{
-						// 	$(this).css("stroke-width","5");
-						// 	$('.section-detailedInfo').addClass('style-hide');
-						// }
-					}
 				);
-				$('.section-titleBar button').click(
-					function(){
-						$('.section-detailedInfo').addClass('style-hide');
-					}
-				);
+				// $('#section-close').click(
+				// 	function(){
+				// 		$('.section-detailedInfo').addClass('style-hide');
+				// 	}
+				// );
 
 			}			
 		},
