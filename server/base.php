@@ -14,24 +14,46 @@
 				//not needed when the data stored is already vaild JSON (in fact it causes issues)
 				$query_1="SELECT properties,postal_code,num_of_cases FROM postal_code_map";
 
-				$search=$database->query($query_1);
-				$output_arr=[];
-				$output='[';
-				for($i=0;$i<$search->num_rows;$i++){
-					$result=$search->fetch_row();
+				////
+				$q2="SELECT postal_code_map.postal_code FROM postal_code_map";
+				$s1=$database->query($q2);
+				$arr1=[];
+				for($i=0;$i<$s1->num_rows;$i++){
+					$result=$s1->fetch_row();
 					//0 is JSON, 1 is postal code, 2 is number of cases
-					$arr_each=[$result[0],$result[1],$result[2]];
-					array_push($output_arr,$arr_each);
+					array_push($arr1,$result[0]);
+				}				
+				// print_r($arr1);
+				$arr2=[];
+				for($i=0;$i<count($arr1);$i++){
+					$code_each=$arr1[$i];
+					$q3="SELECT postal_code_map.properties, postal_code_map.postal_code, COUNT(theft_report.postal_code) FROM postal_code_map,theft_report WHERE postal_code_map.postal_code=theft_report.postal_code AND postal_code_map.postal_code='".$code_each."'";
+					$s2=$database->query($q3);
+					$result=$s2->fetch_row();
+					array_push($arr2,$result);
 				}
+				// print_r($arr2);
+				echo json_encode($arr2);
+				////
 
-				for($i=0;$i<count($output_arr);$i++){
-					$output.=$output_arr[$i][0];
-					$output.=',';
-				}
-				$output_final=rtrim($output,',');
-				$output_final.=']';
+				// $search=$database->query($query_1);
+				// $output_arr=[];
+				// $output='[';
+				// for($i=0;$i<$search->num_rows;$i++){
+				// 	$result=$search->fetch_row();
+				// 	//0 is JSON, 1 is postal code, 2 is number of cases
+				// 	$arr_each=[$result[0],$result[1],$result[2]];
+				// 	array_push($output_arr,$arr_each);
+				// }
+
+				// for($i=0;$i<count($output_arr);$i++){
+				// 	$output.=$output_arr[$i][0];
+				// 	$output.=',';
+				// }
+				// $output_final=rtrim($output,',');
+				// $output_final.=']';
 				// print_r($output_final);
-				echo json_encode($output_arr);
+				// echo json_encode($output_arr);
 				// print_r($output_arr);
 				break;
 
