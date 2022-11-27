@@ -20,6 +20,78 @@
     }
 ?>
 
+
+<?php
+
+    function generatePosts($array){
+        $output_arr_final=$array;
+        for($i=0;$i<count($output_arr_final);$i++){
+            $output_each=$output_arr_final[$i];
+            if($output_arr_final[$i]['category']==1){
+                echo '
+                <div class="flex flex-column section-userWorkDisplay-Box">
+                <div class="flex flex-row section-uploaderInfo">
+                <a href="user-profile.html?userid='.$output_each['user_id'].'" class="flex flex-row flex_center_align_horizontal">
+                <img src="uploads/images/'.$output_each['avatar'].'">
+                <h4>'.$output_each['user_name'].'</h4>
+                </a>
+                <p>'.$output_each['upload_time'].'</p>
+                </div>
+                <div class="flex flex-column section-workdisplay">
+                <a href="detail.html?post='.$output_each['post_id'].'">
+                <img src="uploads/images/'.$output_each['image_content'].'">
+                </a>
+                </div>      
+                <div class="flex flex-row section-workInteractButtons">
+                <button><img src="img/icon-like.svg">'.$output_each['collec_num'].'</button>
+                <button><img src="img/icon-comment.svg">'.$output_each['comment_num'].'</button>
+                </div>                                      
+                </div>                      
+                ';
+            }
+            else{
+                echo '
+                <div class="flex flex-column section-userWorkDisplay-Box">
+                <div class="flex flex-row section-uploaderInfo">
+                <a href="user-profile.html?userid='.$output_each['user_id'].'" class="flex flex-row flex_center_align_horizontal">
+                <img src="uploads/images/'.$output_each['avatar'].'">
+                <h4>'.$output_each['user_name'].'</h4>
+                </a>
+                <p>'.$output_each['upload_time'].'</p>
+                </div>
+                <div class="flex flex-column section-workdisplay">
+                <a href="detail.html?post='.$output_each['post_id'].'">
+                <p>'.$output_each['description'].'</p>
+                </a>
+                </div>      
+                <div class="flex flex-row section-workInteractButtons">
+                <button><img src="img/icon-like.svg">'.$output_each['collec_num'].'</button>
+                <button><img src="img/icon-comment.svg">'.$output_each['comment_num'].'</button>
+                </div>                                      
+                </div>                      
+                ';                      
+            }
+        }        
+    }
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
 //check if an item exists in a watchlist
 function checkWatchlist($db, $product_code, $session){
@@ -33,9 +105,6 @@ function checkWatchlist($db, $product_code, $session){
 }
 
 ?>
-
-
-
 
 <?php
     function page_cssLink($css_name){

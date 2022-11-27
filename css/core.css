@@ -78,7 +78,7 @@ header nav div{
 }
 .section-hoverInfo h1{
 	margin: 0;
-	/*margin-bottom: 0.5rem;*/
+	margin-bottom: 0.5rem;
 }
 .section-hoverInfo{
 	position: relative;
@@ -91,12 +91,12 @@ header nav div{
   height: 100%;
 }
 .section-detailedInfo{
-	max-height: 30rem;
+	max-height: 80%;
 	overflow-y: scroll;
 	flex-wrap: nowrap;
 }
 .section-titleBar h1{
-	margin: 0;
+/*	margin: 0;*/
 	margin-right: 2rem;
 }
 .section-titleBar{

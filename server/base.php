@@ -13,58 +13,51 @@
 				//JSON_OBJECT() is used to stick non JSON variables together into a JSON object
 				//not needed when the data stored is already vaild JSON (in fact it causes issues)
 				$query_1="SELECT properties,postal_code,num_of_cases FROM postal_code_map";
-
 				////
+				$arr_finalOutput=[];
+
 				$q2="SELECT postal_code_map.postal_code FROM postal_code_map";
 				$s1=$database->query($q2);
-				$arr1=[];
+				$arr_pCodeList=[];
 				for($i=0;$i<$s1->num_rows;$i++){
 					$result=$s1->fetch_row();
 					//0 is JSON, 1 is postal code, 2 is number of cases
-					array_push($arr1,$result[0]);
+					array_push($arr_pCodeList,$result[0]);
 				}				
-				// print_r($arr1);
-				$arr2=[];
-				for($i=0;$i<count($arr1);$i++){
-					$code_each=$arr1[$i];
+				$arr_mapTile=[];
+				for($i=0;$i<count($arr_pCodeList);$i++){
+					$code_each=$arr_pCodeList[$i];
 					$q3="SELECT postal_code_map.properties, postal_code_map.postal_code, COUNT(theft_report.postal_code) FROM postal_code_map,theft_report WHERE postal_code_map.postal_code=theft_report.postal_code AND postal_code_map.postal_code='".$code_each."'";
 					$s2=$database->query($q3);
 					$result=$s2->fetch_row();
-					array_push($arr2,$result);
+					array_push($arr_mapTile,$result);
 				}
-				// print_r($arr2);
-				echo json_encode($arr2);
+
+				$query_parkingLot="SELECT lot_id,latitude,longitude,postal_code FROM parking_lot";
+				$result_parkingLot=$database->query($query_parkingLot);
+				$arr_parkingLot=[];
+				for($i=0;$i<$result_parkingLot->num_rows;$i++){
+					$result_each=$result_parkingLot->fetch_assoc();
+					array_push($arr_parkingLot, $result_each);
+				}
+
+
+				$arr_finalOutput=[$arr_mapTile,$arr_parkingLot];
+				echo json_encode($arr_finalOutput);
 				////
-
-				// $search=$database->query($query_1);
-				// $output_arr=[];
-				// $output='[';
-				// for($i=0;$i<$search->num_rows;$i++){
-				// 	$result=$search->fetch_row();
-				// 	//0 is JSON, 1 is postal code, 2 is number of cases
-				// 	$arr_each=[$result[0],$result[1],$result[2]];
-				// 	array_push($output_arr,$arr_each);
-				// }
-
-				// for($i=0;$i<count($output_arr);$i++){
-				// 	$output.=$output_arr[$i][0];
-				// 	$output.=',';
-				// }
-				// $output_final=rtrim($output,',');
-				// $output_final.=']';
-				// print_r($output_final);
-				// echo json_encode($output_arr);
-				// print_r($output_arr);
 				break;
 
 			case 1:
 				if(isset($_GET['code'])){
 					$code=$_GET['code'];
-					$query_1="SELECT postal_code_map.postal_code,COUNT(theft_report.postal_code) FROM postal_code_map,theft_report WHERE postal_code_map.postal_code='".$code."'AND postal_code_map.postal_code=theft_report.postal_code";
+					$query_1="SELECT postal_code_map.postal_code,COUNT(theft_report.postal_code) AS case_num FROM postal_code_map,theft_report WHERE postal_code_map.postal_code='".$code."'AND postal_code_map.postal_code=theft_report.postal_code";
 					$result=$database->query($query_1);
-					$output=$result->fetch_row();
-					// print_r($output);
-					echo json_encode($output);
+					$output=$result->fetch_assoc();
+					
+					$output_layout='<h1>'.$output['postal_code'].'</h1>';	
+					$output_layout.='<p>'.$output['case_num'].' cases</p>';
+					echo json_encode($output_layout);
+
 				}
 				break;
 
@@ -105,23 +98,99 @@
 						';
 					}
 					echo '</div>';
-					// print_r($output_array);
-					// for($i=0;$i<count($output_array);$i++){
+				}
+				break;
 
-					// }
-					// echo json_encode($output_array);	
+			case 3:
+				if(isset($_GET['code'])){
+					$code=$_GET['code'];
+					$query_1="SELECT parking_lot.name, parking_lot.postal_code, COUNT(theft_report.parking_lot) AS case_num,parking_lot.address FROM parking_lot, theft_report WHERE parking_lot.lot_id=".$code." AND parking_lot.lot_id=theft_report.parking_lot";
+					$result=$database->query($query_1);
+					$output=$result->fetch_assoc();
+
+					$output_layout='';
+					if(!$output['name']){
+						$output_layout='<h1>Unnamed Bike Rack</h1>';
+					}
+					else{
+						$output_layout='<h1>'.$output['name'].'</h1>';
+					}
+					$output_layout.='
+						<p>'.$output['address'].'</p>
+						<p>'.$output['case_num'].' cases</p>
+					';
+					echo json_encode($output_layout);
+
+					// echo json_encode($output);
+				}				
+				break;
+
+			case 4:
+				if(isset($_GET['code'])){
+					$code=$_GET['code'];
+					$query_cases="SELECT theft_report.parking_lot,theft_report.report_date,bikes.manufacturer,bikes.model,bikes.type,images.img_link FROM theft_report,bikes,images WHERE theft_report.parking_lot='".$code."' AND theft_report.bike_id=bikes.id AND bikes.id=images.bike_id";
+					$query_title="SELECT parking_lot.lot_id, parking_lot.name, parking_lot.address, parking_lot.description, COUNT(theft_report.parking_lot) AS case_num,parking_lot.fee FROM parking_lot,theft_report WHERE parking_lot.lot_id=".$code." AND parking_lot.lot_id=theft_report.parking_lot";
+					$result_cases=$database->query($query_cases);
+					$result_title=$database->query($query_title);
+					$output_title=$result_title->fetch_assoc();
+
+					$output_array=[];
+					$title='';
+					$desc='';
+					if(!$output_title['name']){
+						$title='Unnamed Bike Rack';
+					}
+					else{
+						$title=$output_title['name'];
+					}
+					if(!$output_title['description']){
+						$desc='No security measure specified';
+					}
+					else{
+						$desc=$output_title['description'];
+					}					
+					echo '
+			            <div class="flex flex-column section-titleBar">
+			              <div class="flex flex-row">
+			                <h1>'.$title.'</h1>
+			                <button id="section-close"><img src=""></button>
+			              </div>
+			              <p>'.$output_title['address'].'</p>
+			              <p>'.$output_title['case_num'].' cases located in this rack last month</p>
+			              <h2>Security Measures:</h2>
+			              <p>'.$desc.'</p>
+			              <h2>Fee:</h2>
+			              <p>'.$output_title['fee'].'</p>
+			            </div>
+					';
+
+					echo '<div class="flex flex-column section-allCases">';
+					echo '<h2>Reported Cases:</h2>';
+					if($result_cases->num_rows>0){
+						for($i=0;$i<$result_cases->num_rows;$i++){
+							$output_each=$result_cases->fetch_assoc();
+							// print_r($output_each);
+							// array_push($output_array,$output_each);
+							echo '
+				              <div class="flex flex-row section-caseReport">
+				                <img src='.$output_each['img_link'].'>
+				                <div class="flex flex-column section-case-texts">
+				                  <h2>'. $output_each['manufacturer'] . ' ' . $output_each['model'] . '</h2>    
+				                  <p>reported on '. $output_each['report_date'] .'</p>
+				                </div>
+				              </div>							
+							';
+						}
+					}
+					else{
+						echo '<p>no case reported</p>';
+					}
+					echo '</div>';
 				}
 				break;
 		}
 
 	}//END if(isset($_GET['request']))//////////////////
 
-              // <div class="flex flex-row section-caseReport">
-              //   <img src='img/case1.jpeg'>
-              //   <div class="flex flex-column section-case-texts">
-              //     <h2>2021 Black Rad Power Bikes Rad Mini 4 Electric Bike</h2>    
-              //     <p>reported on 12/10/2022</p>
-              //   </div>
-              // </div>
 ?>
 

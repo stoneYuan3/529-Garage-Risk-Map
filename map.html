@@ -38,7 +38,7 @@
         <section class="flex flex-row section-info">
           <session class="section-hoverInfo style-hide flex flex-column">
             <h1></h1>
-            <p></p>
+            <p class="cases"></p>
           </session>
           <session class="flex flex-column section-detailedInfo style-hide flex flex-column">
 
@@ -81,9 +81,19 @@
       var map = L.map('map', {zoomControl:false}).setView([49.28897790869182, -123.11445735454026], 13);
 
       L.tileLayer.grayscale('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		maxZoom: 19,
-		ttribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-		}).addTo(map);
+  		maxZoom: 19,
+  		ttribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  		}).addTo(map);
+
+
+      var popup = L.popup();
+      function onMapClick(e) {
+          popup
+              .setLatLng(e.latlng)
+              .setContent("You clicked the map at " + e.latlng.toString())
+              .openOn(map);
+      }
+      map.on('click', onMapClick);
     </script>
     <script src="js/ajax_function.js"></script>
     <script src="js/core.js"></script>
