@@ -68,21 +68,38 @@ header nav div{
 	
 }
 
-.section-info{
+.section-info,.section-label{
 	position: absolute;
-  top: 5rem;
-  right: 2rem;
   z-index: 1000;
   max-height: 90%;
-
 }
-.section-hoverInfo h1{
+.section-info{
+	top: 5rem;
+  right: 2rem;
+}
+.section-label{
+	top:5rem;
+	left:2rem;
+	background-color: white;
+	padding:1rem;
+	border-radius: 1rem;
+}
+.section-label div svg{
+	margin-right: 0.5rem;
+}
+.section-label div{
+	margin-bottom: 0.5rem;
+	align-items: center;
+}
+.section-hoverInfo h1,.section-label h1{
 	margin: 0;
 	margin-bottom: 0.5rem;
+	margin-top: 0.25rem;
 }
 .section-hoverInfo{
 	position: relative;
 	margin-right: 2rem;
+	max-width: 16rem;
 }
 .section-hoverInfo,.section-detailedInfo{
 	background-color: white;
@@ -98,6 +115,9 @@ header nav div{
 .section-titleBar h1{
 /*	margin: 0;*/
 	margin-right: 2rem;
+}
+.section-detailedInfo h2{
+	font-size: 1rem;
 }
 .section-titleBar{
 	/*align-items: center;*/

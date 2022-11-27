@@ -2,6 +2,7 @@
 $('document').ready(function(){
 	var result1="";
 	var connSuccess=false;
+	spawnLabel();
 	$.ajax({
 		type:'POST',
 		url:'server/base.php?request=0',
@@ -146,7 +147,7 @@ $('document').ready(function(){
 					}
 				);
 
-				
+
 				//START upon hover///////////////////
 				$('path').hover(
 					function(){
