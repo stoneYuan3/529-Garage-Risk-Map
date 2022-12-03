@@ -71,10 +71,10 @@ $('document').ready(function(){
 			console.log(connSuccess);
 			if(connSuccess){
 
-				$('.leaflet-marker-pane').addClass('style-hide');
+				// $('.leaflet-marker-pane').addClass('style-hide');
 				map.on('zoomend', function(ev){
 					console.log(map.getZoom());
-					if(map.getZoom()>12){
+					if(map.getZoom()>11){
 						$('.leaflet-marker-pane').removeClass('style-hide');
 					}
 					else{

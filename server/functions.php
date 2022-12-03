@@ -2,6 +2,7 @@
 
 <?php
 	$dbhost='localhost';
+    // $dbhost='34.130.79.236:3306';
     $dbuser="root";
     $dbpass="";
     // $dbname="geodatatest";
