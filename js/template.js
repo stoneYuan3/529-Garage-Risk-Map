@@ -48,8 +48,9 @@ var form_bikeTheftDetail=`
 
         <form id="bike-theftReport" method="POST" class="flex flex-column">
           <label for="reportTime">When</label>
-          <input id="reportTime" type="text" name="reportTime">
-          <label for="reportLocation">Where (Postal Code)</label>
+          <input id="reportTime" type="date" name="reportTime">
+          
+          <label for="reportLocation">Where *(Postal Code)</label>
           <input id="reportLocation" type="text" name="reportLocation">
 
           <label for="reportDesc">description</label>

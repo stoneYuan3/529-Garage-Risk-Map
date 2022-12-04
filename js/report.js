@@ -37,14 +37,40 @@ $('document').ready(function(){
 					$('.style-warning').remove();
 					event.preventDefault();								
 					data_bikeImg.append('img',image);
-					console.log(data_bikeDetail);
-					console.log(data_bikeImg);
-
 					$('#form').html(form_bikeTheftDetail);
 					$('.section-formTitle h1').html('Tell us what happened');
 
 					$('#bike-theftReport').submit(function(event){
-						//
+						$('.style-warning').remove();
+						event.preventDefault();							
+						var data_theftReport=$(this).serializeArray();
+						var formDone_theftReport=true;
+						var brand=data_theftReport[1]['value'];
+						if(!brand){
+						$('<p class="style-warning">Please fill in this section</p>').insertBefore('#brand');
+							formDone_bikedetail=false;
+						}
+						if(formDone_bikedetail){
+							console.log(data_bikeDetail);
+							console.log(data_bikeImg);
+							console.log(data_theftReport);
+							var arr=[data_bikeDetail,data_bikeImg,data_theftReport];
+							var arr=JSON.stringify(arr);
+							$.ajax({
+								type:'POST',
+								url:'server/report.php?query=report',
+								// data:{'bikeDetail':JSON.stringfy(data_bikeDetail),'bikeImg':},
+								data:{arr},
+				              	contentType: false,
+				              	processData: false,
+								success:function(data){
+									console.log(data);
+								},
+								error:function(data){
+									console.log('error,report upload failed');
+								}
+							})			
+						}												
 					});
 				});							
 			}
