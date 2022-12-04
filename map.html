@@ -12,27 +12,83 @@
 
 	</head>
 
+<!--     <section class="flex section-report">
+      <section class="flex flex-column section-report-form">
+
+        <a class="link-report-login" href=""><em>Reporting a registered bike? Log in</em></a>
+        <form id="bike-detail" method="POST" class="flex flex-column">
+          <div class="flex flex-row section-formTitle">
+            <h1>Tell us about your bike</h1>
+            <button id="button-form-quit"><img src=""></button>
+          </div>
+          <label for="nickname">Nickname</label>
+          <input id="nickname" type="text" name="nickname">
+          <label for="brand">Brand</label>
+          <input id="brand" type="text" name="brand">
+          <label for="model">Model</label>
+          <input id="model" type="text" name="model">     
+
+          <label for="serial">Serial Number</label>
+          <input id="serial" type="text" name="serial">
+          <label for="value">Value</label>
+          <input id="value" type="text" name="value">
+          <button id="button-bike-detail-submit">Next</button>
+        </form> -->
+
+<!--         <form id="bike-image" method="POST" class="flex flex-column">
+          <div class="flex flex-row section-formTitle">
+            <h1>Upload Image for Your Bike</h1>
+            <button id="button-form-quit"><img src=""></button>
+          </div>
+          <p>It is optional. Report with image tend to get more views.</p>
+          <input type="file" id="img" name="img" accept="image/*" >
+
+          <button id="button-bike-image-submit">Next</button>
+        </form> -->
+
+<!--         <form id="bike-theftReport" method="POST" class="flex flex-column">
+          <div class="flex flex-row section-formTitle">
+            <h1>Tell us where your bike is stolen</h1>
+            <button id="button-form-quit"><img src=""></button>
+          </div>
+          <label for="reportTime">When</label>
+          <input id="reportTime" type="text" name="reportTime">
+          <label for="reportLocation">Where (Postal Code)</label>
+          <input id="reportLocation" type="text" name="reportLocation">
+
+          <label for="reportDesc">description</label>
+          <input id="reportDesc" type="textarea" name="reportDesc">     
+
+          <label for="reportParking">If it happens in a parking lot, enter the parking lot ID if appliable</label>
+          <input id="reportParking" type="text" name="reportParking">
+          
+          <button id="button-bike-theftReport-submit">Submit</button>
+        </form> -->
+
+<!--       </section>
+    </section> -->
 
 
     <body>
     	<header>
     		<nav class='flex flex-row'>
     			<div class='flex flex-row'>
-    				<a href=""></a>
-    				<a href="">Home</a>
+    				<a href=""><img src="img/nav-logo.png"></a>
+    				<!-- <a href="">Home</a> -->
     				<a href="">Your Garage</a>
     				<a href="">Check a Bike</a>
-    				<a href="">Found Bike</a>
+    				<!-- <a href="">Found Bike</a> -->
     				<a href="">Shield/Goods</a>
     				<a href="">Risk Map</a>
+            <button class="button-nav-report">Report a Theft</button>
     			</div>
 
     			<div>
     				<a href="">login/signup</a>
     			</div>
-
     		</nav>
     	</header>
+
 
     	<!-- <div class="flex flex-row"> -->
         <section class="flex flex-row section-info">
@@ -85,8 +141,8 @@
 
       	<div id="map"></div>
 
-    	<!-- </div> -->
-
+    	<!-- </div> -->    	
+ 	</body>
 
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
      integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
@@ -99,9 +155,9 @@
       var map = L.map('map', {zoomControl:false}).setView([49.28897790869182, -123.11445735454026], 13);
 
       L.tileLayer.grayscale('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  		maxZoom: 19,
-  		ttribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  		}).addTo(map);
+      maxZoom: 19,
+      ttribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
 
 
       var popup = L.popup();
@@ -114,12 +170,11 @@
       map.on('click', onMapClick);
     </script>
     <script src="js/ajax_function.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/report.js"></script>    
     <script src="js/core.js"></script>
     <!-- <script src="js/test.js"></script> -->
     <!-- <script src="js/geojson.js"></script> -->
-    	
- 	</body>
 
-     
 
 </html>
