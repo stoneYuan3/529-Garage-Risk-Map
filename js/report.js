@@ -11,7 +11,9 @@ $('document').ready(function(){
 		$('#bike-detail').submit(function(event){
 			$('.style-warning').remove();
 			event.preventDefault();
+			var data=new FormData();
 			var data_bikeDetail=$(this).serializeArray();
+
 			var formDone_bikedetail=true;
 			var brand=data_bikeDetail[1]['value'];
 			var model=data_bikeDetail[2]['value'];
@@ -26,17 +28,17 @@ $('document').ready(function(){
 			}	
 
 			if(formDone_bikedetail){
+				data.append('bikeDetail',JSON.stringify(data_bikeDetail))
+
 				$('#form').html(form_bikeImage);
 				$('.section-formTitle h1').html('Upload image for your bike');				
-				var formDone_bikeImg=true;
-				var data_bikeImg=new FormData();
-				var image=$('#img').prop('files')[0];				
-				// console.log(data_bikeDetail);
 
 				$('#bike-image').submit(function(event){
-					$('.style-warning').remove();
+					$('.style-warning').remove();		
 					event.preventDefault();								
-					data_bikeImg.append('img',image);
+								
+					var image=$('#img').prop('files')[0];
+					data.append('bikeImg',image);
 					$('#form').html(form_bikeTheftDetail);
 					$('.section-formTitle h1').html('Tell us what happened');
 
@@ -51,16 +53,14 @@ $('document').ready(function(){
 							formDone_bikedetail=false;
 						}
 						if(formDone_bikedetail){
-							console.log(data_bikeDetail);
-							console.log(data_bikeImg);
-							console.log(data_theftReport);
-							var arr=[data_bikeDetail,data_bikeImg,data_theftReport];
-							var arr=JSON.stringify(arr);
+							console.log(data);
+							data.append('theftReport',JSON.stringify(data_theftReport));
+							
 							$.ajax({
 								type:'POST',
 								url:'server/report.php?query=report',
 								// data:{'bikeDetail':JSON.stringfy(data_bikeDetail),'bikeImg':},
-								data:{arr},
+								data:data,
 				              	contentType: false,
 				              	processData: false,
 								success:function(data){

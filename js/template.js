@@ -28,8 +28,13 @@ var form_bikeDetail=`
 
 	<label for="serial">Serial Number</label>
 	<input id="serial" type="text" name="serial">
+	
+	<label for="type">Type</label>
+	<input id="type" type="text" name="type">	
+
 	<label for="value">Value</label>
 	<input id="value" type="text" name="value">
+
 	<button id="button-submit" type="submit">Next</button>
 	</form>
 
