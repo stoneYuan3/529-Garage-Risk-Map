@@ -1,5 +1,3 @@
-
-
 <?php
 	require_once('functions.php');
 
@@ -50,12 +48,13 @@
 			case 1:
 				if(isset($_GET['code'])){
 					$code=$_GET['code'];
-					$query_1="SELECT postal_code_map.postal_code,COUNT(theft_report.postal_code) AS case_num FROM postal_code_map,theft_report WHERE postal_code_map.postal_code='".$code."'AND postal_code_map.postal_code=theft_report.postal_code";
+					$query_1="SELECT postal_code_map.postal_code,COUNT(theft_report.postal_code) AS case_num,postal_code_map.city FROM postal_code_map,theft_report WHERE postal_code_map.postal_code='".$code."'AND postal_code_map.postal_code=theft_report.postal_code";
 					$result=$database->query($query_1);
 					$output=$result->fetch_assoc();
 					
-					$output_layout='<h1>'.$output['postal_code'].'</h1>';	
-					$output_layout.='<p>'.$output['case_num'].' cases</p>';
+					$output_layout='<h1>'.$output['postal_code'].'</h1>';
+					$output_layout.='<p>'.$output['city'].'</p>';
+					$output_layout.='<p>'.$output['case_num'].' reports</p>';
 					echo json_encode($output_layout);
 
 				}
@@ -65,7 +64,7 @@
 				if(isset($_GET['code'])){
 					$code=$_GET['code'];
 					$query_1="SELECT theft_report.postal_code,theft_report.report_date,bikes.manufacturer,bikes.model,bikes.type,images.img_link FROM theft_report,bikes,images WHERE theft_report.postal_code='".$code."' AND theft_report.bike_id=bikes.id AND bikes.id=images.bike_id";
-					$query_title="SELECT postal_code_map.`postal_code`,COUNT(theft_report.`postal_code`) AS case_num FROM theft_report,postal_code_map WHERE postal_code_map.postal_code='".$code."' AND postal_code_map.postal_code=theft_report.postal_code";
+					$query_title="SELECT postal_code_map.`postal_code`,COUNT(theft_report.`postal_code`) AS case_num,postal_code_map.city FROM theft_report,postal_code_map WHERE postal_code_map.postal_code='".$code."' AND postal_code_map.postal_code=theft_report.postal_code";
 					$result=$database->query($query_1);
 					$result_title=$database->query($query_title);
 					$output_title=$result_title->fetch_assoc();
@@ -76,9 +75,10 @@
 			            <div class="flex flex-column section-titleBar">
 			              <div class="flex flex-row">
 			                <h1>'.$output_title['postal_code'].'</h1>
-			                <button id="section-close"><img src=""></button>
+			                <button id="section-close">Close</button>
 			              </div>
-			              <p>'.$output_title['case_num'].' cases last month
+						  <p>'.$output_title['city'].'</p>
+			              <p>'.$output_title['case_num'].' reports</p>
 			            </div>
 					';
 
@@ -104,20 +104,22 @@
 			case 3:
 				if(isset($_GET['code'])){
 					$code=$_GET['code'];
-					$query_1="SELECT parking_lot.name, parking_lot.postal_code, COUNT(theft_report.parking_lot) AS case_num,parking_lot.address FROM parking_lot, theft_report WHERE parking_lot.lot_id=".$code." AND parking_lot.lot_id=theft_report.parking_lot";
+					$query_1="SELECT parking_lot.lot_id, parking_lot.name, parking_lot.postal_code, COUNT(theft_report.parking_lot) AS case_num,parking_lot.address FROM parking_lot, theft_report WHERE parking_lot.lot_id=".$code." AND parking_lot.lot_id=theft_report.parking_lot";
 					$result=$database->query($query_1);
 					$output=$result->fetch_assoc();
 
 					$output_layout='';
+					
 					if(!$output['name']){
-						$output_layout='<h1>Unnamed Bike Rack</h1>';
+						$output_layout.='<h1>Unnamed Bike Rack</h1>';
 					}
 					else{
-						$output_layout='<h1>'.$output['name'].'</h1>';
+						$output_layout.='<h1>'.$output['name'].'</h1>';
 					}
+					$output_layout.='<h2 class="style-lot-id"><em>Parking lot #'.$output['lot_id'].'</em></h2>';
 					$output_layout.='
 						<p>'.$output['address'].'</p>
-						<p>'.$output['case_num'].' cases</p>
+						<p>'.$output['case_num'].' reports</p>
 					';
 					echo json_encode($output_layout);
 
@@ -137,6 +139,7 @@
 					$output_array=[];
 					$title='';
 					$desc='';
+					$title_lot_id='<h2 class="style-lot-id"><em>Parking lot #'.$output_title['lot_id'].'</em></h2>';
 					if(!$output_title['name']){
 						$title='Unnamed Bike Rack';
 					}
@@ -152,11 +155,14 @@
 					echo '
 			            <div class="flex flex-column section-titleBar">
 			              <div class="flex flex-row">
-			                <h1>'.$title.'</h1>
-			                <button id="section-close"><img src=""></button>
+			              	<div class="flex flex-column">
+			                	<h1>'.$title.'</h1>
+			                </div>
+			                <button id="section-close">Close</button>
 			              </div>
+			              '.$title_lot_id.'
 			              <p>'.$output_title['address'].'</p>
-			              <p>'.$output_title['case_num'].' cases located in this rack last month</p>
+			              <p>'.$output_title['case_num'].' reports located in this rack</p>
 			              <h2>Security Measures:</h2>
 			              <p>'.$desc.'</p>
 			              <h2>Fee:</h2>
@@ -193,4 +199,3 @@
 	}//END if(isset($_GET['request']))//////////////////
 
 ?>
-

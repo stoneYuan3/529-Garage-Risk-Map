@@ -23,7 +23,7 @@ function caseColour(number){
 
 function spawnLabel(){
 	var label_colour=['#99000d','#ef3b2c','#fc9272','#fcbba1','#fee0d2','#fff5f0'];
-	var label_level=['>15 cases','10-15 cases','6-10 cases','3-6 cases','0-3 cases','no cases'];
+	var label_level=['>15 reports','10-15 reports','6-10 reports','3-6 reports','0-3 reports','no reports'];
 
 	var layout='<h1>Label</h1>';
 	for(let i=0;i<label_level.length;i++){

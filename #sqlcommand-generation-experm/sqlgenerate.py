@@ -52,8 +52,11 @@ for i in range(len(loadjson)):
     result_postal_code=loadjson[i]["features"][0]["properties"]["postal-fsa"];
 
     sqlTableName="postal_code_map"
-    sqlLine1="INSERT INTO "+sqlTableName+"(properties,postal_code,num_of_cases)"
-    sqlLine2=" VALUES('"+result_each_final+"','" + result_postal_code + "',0); "    
+    city="Delta"
+    sqlLine1="INSERT INTO "+sqlTableName+"(properties,postal_code,city)"
+    sqlLine2=" VALUES('"+result_each_final+"','" + result_postal_code + "','"+city+"'); "    
+
+    #sqlLine2=" VALUES('"+result_each_final+"','" + result_postal_code + "',0); "    
     # print(sqlLine2)
     # file.write(result_each)
     file.write(sqlLine1)

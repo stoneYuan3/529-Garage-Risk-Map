@@ -47,12 +47,12 @@ $('document').ready(function(){
 						event.preventDefault();							
 						var data_theftReport=$(this).serializeArray();
 						var formDone_theftReport=true;
-						var brand=data_theftReport[1]['value'];
-						if(!brand){
-						$('<p class="style-warning">Please fill in this section</p>').insertBefore('#brand');
-							formDone_bikedetail=false;
+						var postal=data_theftReport[1]['value'];
+						if(!postal){
+						$('<p class="style-warning">Please fill in this section</p>').insertBefore('#reportLocation');
+							formDone_theftReport=false;
 						}
-						if(formDone_bikedetail){
+						if(formDone_theftReport){
 							console.log(data);
 							data.append('theftReport',JSON.stringify(data_theftReport));
 							
@@ -65,6 +65,10 @@ $('document').ready(function(){
 				              	processData: false,
 								success:function(data){
 									console.log(data);
+									$('.section-report-form').html(form_success);
+									$('#button-submit').click(function(){
+										window.location.replace("map.html");
+									});
 								},
 								error:function(data){
 									console.log('error,report upload failed');

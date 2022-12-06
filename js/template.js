@@ -4,7 +4,7 @@ var form_base=`
 
 	<div class="flex flex-row section-formTitle">
 	<h1></h1>
-	<button id="button-form-quit"><img src=""></button>
+	<button id="button-form-quit">Quit</button>
 	</div>
 
 	<div id="form">
@@ -28,7 +28,7 @@ var form_bikeDetail=`
 
 	<label for="serial">Serial Number</label>
 	<input id="serial" type="text" name="serial">
-	
+
 	<label for="type">Type</label>
 	<input id="type" type="text" name="type">	
 
@@ -66,4 +66,9 @@ var form_bikeTheftDetail=`
           
           <button id="button-submit" type="submit">Submit</button>
         </form>
+`;
+
+var form_success = `
+	<h1>Success!</h1>
+	<button id="button-submit">Back to map</button>
 `;

@@ -40,9 +40,19 @@
   // var arr=['V7B','V6V','V7E','V6Y','V7A','V7C','V6X','V6W'];
 
   //surrey
-  var arr=['V3S','V3T','V3X','V3R','V4N','V3V','V4P','V4A','V3W'];
+  // var arr=['V3S','V3T','V3X','V3R','V4N','V3V','V4P','V4A','V3W'];
 
-  // var arr=['V6A','V6B','V6C','V6E'];
+  //New Westminster
+  // var arr=['V3M','V3L'];
+
+  //Port Coquitlam
+  // var arr=['V3B','V3E','V3C'];
+
+  //Coquitlam,Port Moody
+  // var arr=['V3J','V3K','V3H'];
+
+  //Delta
+  var arr=['V4K','V4C','V4E','V4L','V4G','V4M'];
 
   var code='';
 

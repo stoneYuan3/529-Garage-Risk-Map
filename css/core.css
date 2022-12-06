@@ -31,7 +31,7 @@ figure img,img{
 }
 
 h1,h2{
-	margin: 0.75rem 0 0.25rem 0;
+	margin: 0.5rem 0 0.25rem 0;
 }
 
 html,body{
@@ -78,26 +78,62 @@ header nav div{
     color: red;
     font-size: 1rem;
 }
-
-.button-nav-report{
-	border: 2px solid white;
-	background-color: white;
+.style-lot-id{
+	font-size: 1rem;
+	margin-top: 0rem;
+	margin-bottom: 0.75rem;
+/*	font-weight: normal;*/
+}
+button{
 	border-radius: 0.5rem;
 	padding:0.25rem 1rem;
 	font-weight: bold;
 	font-size: 1rem;
+
+	border: 2px solid #002C40;
+	background-color: #002C40;
+	color: white;		
+}
+button:hover{
+	cursor: pointer;
+	background-color: white;
+	color:#002C40;	
+}
+nav button{
+	border: 2px solid white;
+	background-color: white;
+	color:#002C40;
 	margin-left: 1rem;
 }
-.button-nav-report:hover{
-	cursor: pointer;
+nav button:hover{
 	background-color: #002C40;
-	color:white;
+	color:white;		
+}
+button img{
+	width:1rem;
+	height: 1rem;
+}
+.section-detailedInfo button{
+	font-size: 0.75rem;
+}
+#button-form-quit{
+	margin-left: 2rem;
+	font-size: 0.75rem;
+/*	border: 2px solid white;
+	background-color: none;*/
 }
 
+#form form{
+	margin-top: 0.75rem;
+}
+#form form label{
+	margin-bottom: 0.1rem;
+}
 .link-report-login{
 	margin-top: 1rem;
 /*	font-size: italic;*/
 	font-size: 0.75rem;
+	margin-bottom: 1rem;
 }
 .section-report{
 	position: absolute;
@@ -148,6 +184,9 @@ header nav div{
 	top: 5rem;
   right: 2rem;
 }
+.section-info p{
+	margin-bottom: 0.15rem;
+}
 .section-label{
 	top:5rem;
 	left:2rem;
@@ -162,10 +201,15 @@ header nav div{
 	margin-bottom: 0.5rem;
 	align-items: center;
 }
-.section-hoverInfo h1,.section-label h1{
+.section-hoverInfo h1{
 	margin: 0;
+	margin-bottom: 0.25rem;
+	margin-top: 0.5rem;
+}
+.section-label h1{
+	margin: 0;	
 	margin-bottom: 0.5rem;
-	margin-top: 0.25rem;
+	margin-top: 0.75rem;	
 }
 .section-hoverInfo{
 	position: relative;
@@ -196,6 +240,7 @@ header nav div{
 }
 .section-titleBar div{
 	justify-content: space-between;
+	align-items: center;
 }
 
 .section-caseReport {
