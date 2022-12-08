@@ -7,7 +7,7 @@
 			//in this case the result received is an stdClass. has to be converted to an array in order to be used
 			//https://stackoverflow.com/questions/18576762/php-stdclass-to-array
 			$arr_bikeDetail=json_decode($_POST['bikeDetail'],true);
-
+			//process bike detail form
 			$query_bikeDetail="INSERT INTO bikes(nickname,manufacturer,model,serial_number,type,value)";
 			$query_bikeDetail.="VALUES(?,?,?,?,?,?)";
 			$stmt_bikeDetail=$database->prepare($query_bikeDetail);
@@ -15,12 +15,13 @@
 			$stmt_bikeDetail->execute();
 
 			$post_id=$database->insert_id;
+			//process user uploaded image
 			if(isset($_FILES['bikeImg'])){
 				$arr_bikeImg=$_FILES['bikeImg'];
 
 				$file_name=$arr_bikeImg['name'];
 				$file_tempLink=$arr_bikeImg['tmp_name'];
-
+				//move image to the folder
 				$moveimage=move_uploaded_file($file_tempLink, "../img/".$file_name);
 				if($moveimage){
 					$file_link='img/'.$file_name;				
@@ -31,6 +32,7 @@
 					$stmt_bikeImg->execute();
 				}				
 			}
+			//if no image uploaded, assign the file location of the placeholder image to the report
 			else{
 				$file_link='img/bike_placehoder.png';				
 				$query_bikeImg="INSERT INTO images(bike_id,img_link)";
@@ -42,7 +44,7 @@
 
 
 			$arr_theftReport=json_decode($_POST['theftReport'],true);
-
+			//process theft report form
 			if(!empty($arr_theftReport[3]['value'])){
 
 				$query_theftReport="INSERT INTO theft_report(bike_id,report_date,postal_code,description,parking_lot)";
@@ -59,8 +61,6 @@
 				$stmt_theftReport->execute();
 			}
 			
-
-			// echo $arr_bikeDetail[0]['value'];
 		}
 	}
 ?>

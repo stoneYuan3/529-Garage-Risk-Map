@@ -7,7 +7,7 @@ $('document').ready(function(){
 		$('#button-form-quit').click(function(){
 			$('.section-report').remove();
 		});
-
+		
 		$('#bike-detail').submit(function(event){
 			$('.style-warning').remove();
 			event.preventDefault();

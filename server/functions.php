@@ -1,9 +1,7 @@
 <?php
 	$dbhost='localhost';
-    // $dbhost='34.130.79.236:3306';
     $dbuser="root";
     $dbpass="";
-    // $dbname="geodatatest";
     $dbname="iat438-individualproject";	
 
     function db_connect($dbhost,$dbuser,$dbpass,$dbname){
@@ -16,6 +14,7 @@
         }
     }
 
+    //generate theft reports list for each postal code section when users click on postal code sections
     function generatePosts($array){
         $output_arr_final=$array;
         for($i=0;$i<count($output_arr_final);$i++){
@@ -70,27 +69,27 @@
 
 
 
+    //functions from other projects that may become useful. not used in the project
+    // function page_cssLink($css_name){
+    //     $cssLink = "<link rel = \"stylesheet\" href = \"". $css_name . "\">";
+    //     echo $cssLink;
+    // }
 
-    function page_cssLink($css_name){
-        $cssLink = "<link rel = \"stylesheet\" href = \"". $css_name . "\">";
-        echo $cssLink;
-    }
-
-    //remove/add https
-    function removeHTTPS(){
-        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on'){
-            header('Location:http://'. $_SERVER['HTTP_HOST'] .
-            $_SERVER['REQUEST_URI']);
-            exit();
-        }        
-    }
-    function addHTTPS(){
-        if($_SERVER['HTTPS']!='on'){
-            header('Location:https://'. $_SERVER['HTTP_HOST'] .
-            $_SERVER['REQUEST_URI']);
-            exit();
-        }        
-    }    
+    // //remove/add https
+    // function removeHTTPS(){
+    //     if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on'){
+    //         header('Location:http://'. $_SERVER['HTTP_HOST'] .
+    //         $_SERVER['REQUEST_URI']);
+    //         exit();
+    //     }        
+    // }
+    // function addHTTPS(){
+    //     if($_SERVER['HTTPS']!='on'){
+    //         header('Location:https://'. $_SERVER['HTTP_HOST'] .
+    //         $_SERVER['REQUEST_URI']);
+    //         exit();
+    //     }        
+    // }    
     ////////////////////
 
 ?>

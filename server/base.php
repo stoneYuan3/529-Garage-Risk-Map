@@ -40,7 +40,8 @@
 					array_push($arr_parkingLot, $result_each);
 				}
 
-
+				//mapTile are geoJSON arrays for postal codes
+				//parkingLot are parking lot info 
 				$arr_finalOutput=[$arr_mapTile,$arr_parkingLot];
 				echo json_encode($arr_finalOutput);
 				////
