@@ -45,25 +45,29 @@ body{
 	height: 100%;
 }
 #map{ 
-	/*height: 30rem;*/
-	/*position: relative;*/
 	height: 100%;
 	width: 100%;
-
-	/*float: left;*/
 }
-
+.p-address{
+	padding:0.5rem;
+	border:2px solid black;
+	margin-bottom: 0.75rem !important;
+	border-radius: 0.5rem;
+}
 /*/////////////*/
 
 header nav{
-	background-color: #002C40;
+	background-color: #001C28;
 	padding: 0.75rem 0.5rem;
 	justify-content: space-between;
 	align-items: center;
 }
+.logo{
+	margin:0 0.5rem;
+}
 header nav a{
 	color: white;
-	margin: 0 0.5rem;
+	margin: 0 0.75rem;
 	font-family: Abel,sans-serif;
 }
 header nav img{
@@ -90,23 +94,23 @@ button{
 	font-weight: bold;
 	font-size: 1rem;
 
-	border: 2px solid #002C40;
-	background-color: #002C40;
+	border: 2px solid #001C28;
+	background-color: #001C28;
 	color: white;		
 }
 button:hover{
 	cursor: pointer;
 	background-color: white;
-	color:#002C40;	
+	color:#001C28;	
 }
 nav button{
 	border: 2px solid white;
 	background-color: white;
-	color:#002C40;
+	color:#001C28;
 	margin-left: 1rem;
 }
 nav button:hover{
-	background-color: #002C40;
+	background-color: #001C28;
 	color:white;		
 }
 button img{
@@ -131,9 +135,12 @@ button img{
 }
 .link-report-login{
 	margin-top: 1rem;
-/*	font-size: italic;*/
 	font-size: 0.75rem;
 	margin-bottom: 1rem;
+}
+.p-notify{
+	margin-top: 0.5rem;
+/*	font-size: 0.75rem;	*/
 }
 .section-report{
 	position: absolute;
@@ -200,6 +207,9 @@ button img{
 .section-label div{
 	margin-bottom: 0.5rem;
 	align-items: center;
+}
+.section-hoverInfo{
+	pointer-events: none;
 }
 .section-hoverInfo h1{
 	margin: 0;
@@ -274,46 +284,3 @@ button img{
 }
 
 
-
-
-
-
-
-
-
-
-
-/*.section-querySearch div{
-	margin-right: 2rem;
-	margin-bottom: 0.75rem;
-}*/
-
-/*.section-querySearch-subsec label,.section-querySearch-subsec select, .section-querySearch-subsec p, .section-querySearch-subsec input{
-	margin-right: 0.5rem;
-	margin-bottom: 0.25rem;
-}
-
-.section-orderParameter input{
-	margin-right: 0.5rem;
-}
-
-
-.section-results{
-	margin-top:3rem; 
-	padding-top:1rem; 
-	border-top:1px solid black;
-}
-
-.section-results div{
-	margin-top: 2rem;
-}
-
-th{
-	border: 3px solid black;
-	padding: 1rem;
-}
-td{
-	border: 1px solid black;
-	padding: 1rem;
-}
-*/

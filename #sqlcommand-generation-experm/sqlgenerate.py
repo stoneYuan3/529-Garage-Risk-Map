@@ -52,7 +52,7 @@ for i in range(len(loadjson)):
     result_postal_code=loadjson[i]["features"][0]["properties"]["postal-fsa"];
 
     sqlTableName="postal_code_map"
-    city="Delta"
+    city="West Vancouver"
     sqlLine1="INSERT INTO "+sqlTableName+"(properties,postal_code,city)"
     sqlLine2=" VALUES('"+result_each_final+"','" + result_postal_code + "','"+city+"'); "    
 

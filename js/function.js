@@ -1,17 +1,17 @@
 function caseColour(number){
-	if(number>=15){
+	if(number>=13){
 		return '#99000d';		
 	}
-	else if(number>=10 && number<15){
+	else if(number>=9 && number<13){
 		return '#ef3b2c';
 	}
-	else if(number>=6 && number<10){
+	else if(number>=5 && number<9){
 		return '#fc9272';
 	}
-	else if(number>=3 && number<6){
+	else if(number>=2 && number<5){
 		return '#fcbba1';
 	}
-	else if(number>0 && number<3){
+	else if(number>0 && number<2){
 		return '#fee0d2';
 	}	
 	else{
@@ -23,7 +23,7 @@ function caseColour(number){
 
 function spawnLabel(){
 	var label_colour=['#99000d','#ef3b2c','#fc9272','#fcbba1','#fee0d2','#fff5f0'];
-	var label_level=['>15 reports','10-15 reports','6-10 reports','3-6 reports','0-3 reports','no reports'];
+	var label_level=['>13 reports','9-13 reports','5-9 reports','2-5 reports','0-2 reports','no reports'];
 
 	var layout='<h1>Label</h1>';
 	for(let i=0;i<label_level.length;i++){

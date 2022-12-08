@@ -1,180 +1,88 @@
 <!doctype html>
 <html lang="en">
-    <head>
-		<meta name="viewport" content="width=device-width,initial-scale=1.0">
-		<meta charset="utf-8">
-		<title>529 Garage</title>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>529 Garage</title>
 
-		<link rel = "stylesheet" href = "css/core.css">
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
-	     integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
-	     crossorigin=""/>
+  <link rel = "stylesheet" href = "css/core.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+  integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+  crossorigin=""/>
 
-	</head>
+</head>
 
-<!--     <section class="flex section-report">
-      <section class="flex flex-column section-report-form">
+<body>
+ <header>
+  <nav class='flex flex-row'>
+   <div class='flex flex-row'>
+    <a class="logo" href=""><img src="img/nav-logo.png"></a>
+    <!-- <a href="">Home</a> -->
+    <a href="">Your Garage</a>
+    <a href="">Check a Bike</a>
+    <!-- <a href="">Found Bike</a> -->
+    <a href="">Shield/Goods</a>
+    <a href="">Risk Map</a>
+    <button class="button-nav-report">Report a Theft</button>
+  </div>
 
-        <a class="link-report-login" href=""><em>Reporting a registered bike? Log in</em></a>
-        <form id="bike-detail" method="POST" class="flex flex-column">
-          <div class="flex flex-row section-formTitle">
-            <h1>Tell us about your bike</h1>
-            <button id="button-form-quit"><img src=""></button>
-          </div>
-          <label for="nickname">Nickname</label>
-          <input id="nickname" type="text" name="nickname">
-          <label for="brand">Brand</label>
-          <input id="brand" type="text" name="brand">
-          <label for="model">Model</label>
-          <input id="model" type="text" name="model">     
-
-          <label for="serial">Serial Number</label>
-          <input id="serial" type="text" name="serial">
-          <label for="value">Value</label>
-          <input id="value" type="text" name="value">
-          <button id="button-bike-detail-submit">Next</button>
-        </form> -->
-
-<!--         <form id="bike-image" method="POST" class="flex flex-column">
-          <div class="flex flex-row section-formTitle">
-            <h1>Upload Image for Your Bike</h1>
-            <button id="button-form-quit"><img src=""></button>
-          </div>
-          <p>It is optional. Report with image tend to get more views.</p>
-          <input type="file" id="img" name="img" accept="image/*" >
-
-          <button id="button-bike-image-submit">Next</button>
-        </form> -->
-
-<!--         <form id="bike-theftReport" method="POST" class="flex flex-column">
-          <div class="flex flex-row section-formTitle">
-            <h1>Tell us where your bike is stolen</h1>
-            <button id="button-form-quit"><img src=""></button>
-          </div>
-          <label for="reportTime">When</label>
-          <input id="reportTime" type="text" name="reportTime">
-          <label for="reportLocation">Where (Postal Code)</label>
-          <input id="reportLocation" type="text" name="reportLocation">
-
-          <label for="reportDesc">description</label>
-          <input id="reportDesc" type="textarea" name="reportDesc">     
-
-          <label for="reportParking">If it happens in a parking lot, enter the parking lot ID if appliable</label>
-          <input id="reportParking" type="text" name="reportParking">
-          
-          <button id="button-bike-theftReport-submit">Submit</button>
-        </form> -->
-
-<!--       </section>
-    </section> -->
+  <div>
+    <a href="">Log in</a>
+  </div>
+</nav>
+</header>
 
 
-    <body>
-    	<header>
-    		<nav class='flex flex-row'>
-    			<div class='flex flex-row'>
-    				<a href=""><img src="img/nav-logo.png"></a>
-    				<!-- <a href="">Home</a> -->
-    				<a href="">Your Garage</a>
-    				<a href="">Check a Bike</a>
-    				<!-- <a href="">Found Bike</a> -->
-    				<a href="">Shield/Goods</a>
-    				<a href="">Risk Map</a>
-            <button class="button-nav-report">Report a Theft</button>
-    			</div>
+<!-- <div class="flex flex-row"> -->
+  <section class="flex flex-row section-info">
+    <session class="section-hoverInfo style-hide flex flex-column">
+      <h1></h1>
+      <p class="cases"></p>
+    </session>
+    <session class="flex flex-column section-detailedInfo style-hide flex flex-column">
+    </session>
+  </section>
 
-    			<div>
-    				<a href="">login/signup</a>
-    			</div>
-    		</nav>
-    	</header>
+  <section class="section-label flex flex-column">
 
+  </section>
 
-    	<!-- <div class="flex flex-row"> -->
-        <section class="flex flex-row section-info">
-          <session class="section-hoverInfo style-hide flex flex-column">
-            <h1></h1>
-            <p class="cases"></p>
-          </session>
-          <session class="flex flex-column section-detailedInfo style-hide flex flex-column">
-<!--             <div class="flex flex-column section-titleBar">
-              <div class="flex flex-row">
-                <h1>V6G</h1>
-                <button><img src=''></button>
-              </div>
-              <p>12 cases last month</p>
-            </div> -->
+  <div id="map"></div>
 
-            <!-- <div class="flex flex-column section-allCases"> -->
+  <!-- </div> -->    	
+</body>
 
-<!--               <div class="flex flex-row section-caseReport">
-                <img src='img/case1.jpeg'>
-                <div class="flex flex-column section-case-texts">
-                  <h2>2021 Black Rad Power Bikes Rad Mini 4 Electric Bike</h2>    
-                  <p>reported on 12/10/2022</p>
-                </div>
-              </div> -->
-              
-            <!-- </div> -->
-          </session>
-        </section>
+<script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+crossorigin=""></script>
+<script src="js/TileLayer.Grayscale.js"></script>
+<script src="js/jquery-3.6.1.js"></script>
 
-        <section class="section-label flex flex-column">
-<!--           <h1>Label</h1>
-          <div class="flex flex-row">
-            <svg width="1.5rem" height="1.5rem"><rect width="1.5rem" height="1.5rem" style="fill:#99000d;"></svg>
-              <p>>15 cases</p>
-          </div>
-          <div class="flex flex-row">
-            <svg width="1.5rem" height="1.5rem"><rect width="1.5rem" height="1.5rem" style="fill:#ef3b2c;"></svg>
-              <p>10-15 cases</p>
-          </div>  
-          <div class="flex flex-row">
-            <svg width="1.5rem" height="1.5rem"><rect width="1.5rem" height="1.5rem" style="fill:#fc9272;"></svg>
-              <p>10-15 cases</p>
-          </div>  
-          <div class="flex flex-row">
-            <svg width="1.5rem" height="1.5rem"><rect width="1.5rem" height="1.5rem" style="fill:#fcbba1;"></svg>
-              <p>10-15 cases</p>
-          </div>    -->                           
-        </section>
-
-      	<div id="map"></div>
-
-    	<!-- </div> -->    	
- 	</body>
-
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
-     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
-     crossorigin=""></script>
-    <script src="js/TileLayer.Grayscale.js"></script>
-    <script src="js/jquery-3.6.1.js"></script>
-
-    <script>
+<script>
       // var map = L.map('map').setView([51.505, -0.09], 13);
-      var map = L.map('map', {zoomControl:false}).setView([49.28897790869182, -123.11445735454026], 13);
+  var map = L.map('map', {zoomControl:false}).setView([49.281422, -123.10421], 12);
 
-      L.tileLayer.grayscale('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      ttribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(map);
+  L.tileLayer.grayscale('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    ttribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
 
 
-      var popup = L.popup();
-      function onMapClick(e) {
-          popup
-              .setLatLng(e.latlng)
-              .setContent("You clicked the map at " + e.latlng.toString())
-              .openOn(map);
-      }
-      map.on('click', onMapClick);
-    </script>
-    <script src="js/function.js"></script>
-    <script src="js/template.js"></script>
-    <script src="js/report.js"></script>    
-    <script src="js/core.js"></script>
-    <!-- <script src="js/test.js"></script> -->
-    <!-- <script src="js/geojson.js"></script> -->
+  // var popup = L.popup();
+  // function onMapClick(e) {
+  //   popup
+  //   .setLatLng(e.latlng)
+  //   .setContent("You clicked the map at " + e.latlng.toString())
+  //   .openOn(map);
+  // }
+  // map.on('click', onMapClick);
+</script>
+<script src="js/function.js"></script>
+<script src="js/template.js"></script>
+<script src="js/report.js"></script>    
+<script src="js/core.js"></script>
+<!-- <script src="js/test.js"></script> -->
+<!-- <script src="js/geojson.js"></script> -->
 
 
 </html>

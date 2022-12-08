@@ -7,6 +7,7 @@
 	if(isset($_GET['request'])){
 
 		switch($_GET['request']){
+			//load map
 			case 0:
 				//JSON_OBJECT() is used to stick non JSON variables together into a JSON object
 				//not needed when the data stored is already vaild JSON (in fact it causes issues)
@@ -45,6 +46,7 @@
 				////
 				break;
 
+			//load info for each section when hovering
 			case 1:
 				if(isset($_GET['code'])){
 					$code=$_GET['code'];
@@ -54,12 +56,13 @@
 					
 					$output_layout='<h1>'.$output['postal_code'].'</h1>';
 					$output_layout.='<p>'.$output['city'].'</p>';
-					$output_layout.='<p>'.$output['case_num'].' reports</p>';
+					$output_layout.='<p><strong>'.$output['case_num'].' reports</strong></p>';
 					echo json_encode($output_layout);
 
 				}
 				break;
 
+			//load info for each section when clicked
 			case 2:
 				if(isset($_GET['code'])){
 					$code=$_GET['code'];
@@ -78,7 +81,7 @@
 			                <button id="section-close">Close</button>
 			              </div>
 						  <p>'.$output_title['city'].'</p>
-			              <p>'.$output_title['case_num'].' reports</p>
+			              <p><strong>'.$output_title['case_num'].' reports</strong></p>
 			            </div>
 					';
 
@@ -101,6 +104,7 @@
 				}
 				break;
 
+			//load info for each parking lot icon when hovering
 			case 3:
 				if(isset($_GET['code'])){
 					$code=$_GET['code'];
@@ -118,8 +122,8 @@
 					}
 					$output_layout.='<h2 class="style-lot-id"><em>Parking lot #'.$output['lot_id'].'</em></h2>';
 					$output_layout.='
-						<p>'.$output['address'].'</p>
-						<p>'.$output['case_num'].' reports</p>
+						<p class="p-address">'.$output['address'].'</p>
+						<p><strong>'.$output['case_num'].' reports</strong></p>
 					';
 					echo json_encode($output_layout);
 
@@ -127,6 +131,7 @@
 				}				
 				break;
 
+			//load info for each parking lot icon when clicked
 			case 4:
 				if(isset($_GET['code'])){
 					$code=$_GET['code'];
@@ -161,8 +166,8 @@
 			                <button id="section-close">Close</button>
 			              </div>
 			              '.$title_lot_id.'
-			              <p>'.$output_title['address'].'</p>
-			              <p>'.$output_title['case_num'].' reports located in this rack</p>
+			              <p class="p-address">'.$output_title['address'].'</p>
+			              <p><strong>'.$output_title['case_num'].' reports</strong> located in this rack</p>
 			              <h2>Security Measures:</h2>
 			              <p>'.$desc.'</p>
 			              <h2>Fee:</h2>

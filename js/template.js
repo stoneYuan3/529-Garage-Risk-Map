@@ -35,6 +35,8 @@ var form_bikeDetail=`
 	<label for="value">Value</label>
 	<input id="value" type="text" name="value">
 
+	<p class="p-notify">Note: Inputs marked with * have to be filled</p>
+
 	<button id="button-submit" type="submit">Next</button>
 	</form>
 
@@ -61,9 +63,11 @@ var form_bikeTheftDetail=`
           <label for="reportDesc">description</label>
           <input id="reportDesc" type="textarea" name="reportDesc">     
 
-          <label for="reportParking">If it happens in a parking lot, enter the parking lot ID if appliable</label>
+          <label for="reportParking">parking lot ID (if applicable)</label>
           <input id="reportParking" type="text" name="reportParking">
           
+          <p class="p-notify">Note: Inputs marked with * have to be filled</p>
+
           <button id="button-submit" type="submit">Submit</button>
         </form>
 `;
